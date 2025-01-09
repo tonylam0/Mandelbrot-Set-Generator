@@ -1,4 +1,5 @@
 import pygame
+from calc import Bounds
 
 pygame.init()
 
@@ -12,6 +13,8 @@ def main():
     while running:
         clock.tick(60)
         WINDOW.fill((0,0,0))
+
+        points = Bounds.calc(0.8, 0.15j, 20)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
