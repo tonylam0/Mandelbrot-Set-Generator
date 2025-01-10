@@ -3,23 +3,22 @@ import matplotlib
 import pygame
 
 class Bounds:
-    SCALE = 100
+    SCALE = 10000
 
-    def __init__(self, initial, complex_num, iterations) -> None:
-        self.initial = initial
+    def __init__(self, complex_num, iterations) -> None:
         self.complex_num = complex_num
         self.iterations = iterations
     
     # Iterative formula
     # c represents a complex number 
-    def calc(z, complex_num, iterations):
+    def calc(complex_num, iterations):
         points = []
+        z = 0
 
         while iterations > 0:
            iterations -= 1
-           z_sum = z**2 + complex_num
-           points.append((z, z_sum))
-           z = z_sum
+           z = z**2 + complex_num
+           points.append((z.real, z.imag))
         return points
     
     def draw(win, points: list):
@@ -28,6 +27,6 @@ class Bounds:
             pygame.draw.circle(
                 win, 
                 (173, 216, 230), 
-                (point[0] * Bounds.SCALE, point[1] * Bounds.SCALE),
+                (point[0] * Bounds.SCALE + 1000 / 2, point[1] * Bounds.SCALE + 800 / 2),
                 5
             )
