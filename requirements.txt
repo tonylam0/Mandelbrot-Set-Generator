@@ -1,3 +1,2 @@
-matplotlib==3.10.0
 numpy==2.2.0
 pygame==2.6.1

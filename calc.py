@@ -1,44 +1,61 @@
-import numpy
-import matplotlib
+import numpy as np
 import pygame
 
-class Bounds:
-    SCALE = 50
 
-    def __init__(self, complex_num, iterations) -> None:
-        self.complex_num = complex_num
-        self.iterations = iterations
+class Bounds:
+    SCALE = 350
+
+    # Creates a range for real and imaginary numbers
+    real_range = np.linspace(-2, 1, 1000)
+    imag_range = np.linspace(-1.5, 1.5, 1000)
+
+    # Creates a 2D grid for the complex plane
+    real, imag = np.meshgrid(real_range, imag_range)
+
+    # Outputs a list of lists containing real array + imaginary array * j
+    c_values = real + imag * 1j
+    iterations = np.zeros(c_values.shape)
+
+    escape_radius = 2
     
     # Iterative formula
     # c represents a complex number 
-    def calc(points, z, complex_num, iterations):
-        if iterations > 0:
-           iterations -= 1
-           z = z**2 + complex_num
-           points.append((z.real, z.imag))
-        return points, z, iterations
+    def calc():
+        # Will return 500 for each due to range 
+        for real in range(Bounds.c_values.shape[0]):
+            for imag in range(Bounds.c_values.shape[1]):
+                z = 0
+                c = Bounds.c_values[real, imag]  # Treated as coordinate in the 2D plane
+                max_iterations = 100
+
+                for i in range(max_iterations):
+                    z = z**2 + c
+                    
+                    # Tracks when z unbounds
+                    # i > 0 prevents escaped c's to be colored the same as bounded
+                    if abs(z) > Bounds.escape_radius and i > 0:
+                        Bounds.iterations[real, imag] = i
+                        print(f"Point {c.round(2)} escaped at iteration {i}")
+                        break
     
-    def draw(win, points: list):
-        # Draws a circle on the points created by the iterative formula
-        print(points)
-        if len(points) > 1:
-            pygame.draw.lines(win, (230, 230, 250), False, points)
+    def draw(win):
+        for real in range(Bounds.c_values.shape[0]):
+            for imag in range(Bounds.c_values.shape[1]):
+                c = Bounds.c_values[real, imag] 
+                if 75 < Bounds.iterations[real, imag] < 101: 
+                    color = (255, 165, 0)
+                elif 50 < Bounds.iterations[real, imag] < 76: 
+                    color = (255, 0, 0)
+                elif 25 < Bounds.iterations[real, imag] < 51: 
+                    color = (255, 255, 0)
+                elif 0 < Bounds.iterations[real, imag] < 26: 
+                    color = (51, 0, 102)
+                elif Bounds.iterations[real, imag] == 0:
+                    color = (25, 0, 51)
 
-        for idx, point in enumerate(points):
-            pygame.draw.circle(
-                win, 
-                (173, 216, 230), 
-                (point[0] * Bounds.SCALE + 1000 / 2, point[1] * Bounds.SCALE + 800 / 2),
-                2.5
-            )
-
-            print(points[idx][0] * Bounds.SCALE + 1000 / 2, points[idx][1] * Bounds.SCALE + 800 / 2)
-
-            if len(points) > 1:
-                pygame.draw.line(
+                pygame.draw.circle(
                     win, 
-                    (230, 230, 250), 
-                    (points[idx][0] * Bounds.SCALE + 1000 / 2, points[idx][1] * Bounds.SCALE + 800 / 2),
-                    (points[idx-1][0] * Bounds.SCALE + 1000 / 2, points[idx-1][1] * Bounds.SCALE + 800 / 2)
+                    color, 
+                    (c.real * Bounds.SCALE + 1400 / 2, c.imag * Bounds.SCALE + 800 / 2),
+                    1
                 )
-

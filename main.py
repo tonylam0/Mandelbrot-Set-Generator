@@ -1,5 +1,7 @@
 import pygame
 from calc import Bounds
+import numpy as np
+
 
 pygame.init()
 
@@ -9,16 +11,13 @@ pygame.display.set_caption("Mandelbrot Set")
 def main():
     running = True
     clock = pygame.time.Clock()
-    points = []
-    iterations = 200
-    z = 0
+    Bounds.calc()
 
     while running:
         clock.tick(20)
-        WINDOW.fill((0,0,0))
+        WINDOW.fill((255,255,255))
 
-        points, z, iterations = Bounds.calc(points, z, 0.8j, iterations)
-        Bounds.draw(WINDOW, points)
+        Bounds.draw(WINDOW)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
