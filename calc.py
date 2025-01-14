@@ -6,8 +6,10 @@ class Bounds:
     SCALE = 350
 
     # Creates a range for real and imaginary numbers
-    real_range = np.linspace(-2, 1, 1000)
-    imag_range = np.linspace(-1.5, 1.5, 1000)
+    # Increasing the amount of points increases the accuracy
+    points = 1000
+    real_range = np.linspace(-2, 1, points)
+    imag_range = np.linspace(-1.5, 1.5, points)
 
     # Creates a 2D grid for the complex plane
     real, imag = np.meshgrid(real_range, imag_range)
@@ -23,6 +25,7 @@ class Bounds:
     def calc():
         # Will return 500 for each due to range 
         for real in range(Bounds.c_values.shape[0]):
+            print(f"Computing: {int(real/Bounds.points*100+1)}% done")
             for imag in range(Bounds.c_values.shape[1]):
                 z = 0
                 c = Bounds.c_values[real, imag]  # Treated as coordinate in the 2D plane
@@ -35,31 +38,22 @@ class Bounds:
                     # i > 0 prevents escaped c's to be colored the same as bounded
                     if abs(z) > Bounds.escape_radius and i > 0:
                         Bounds.iterations[real, imag] = i
-                        print(f"Point {c.round(2)} escaped at iteration {i}")
+                        # print(f"Point {c.round(2)} escaped at iteration {i}")
                         break
     
     def draw(win):
         for real in range(Bounds.c_values.shape[0]):
             for imag in range(Bounds.c_values.shape[1]):
                 c = Bounds.c_values[real, imag] 
-                if Bounds.iterations[real, imag] > 75: 
-                    color = (255, 165, 0)
-                elif 50 < Bounds.iterations[real, imag] <= 75: 
-                    color = (255, 0, 0)
-                elif 20 < Bounds.iterations[real, imag] <= 50: 
-                    color = (255, 255, 0)
-                # elif 15 < Bounds.iterations[real, imag] <= 25: 
-                #     color = (0, 122, 204)
-                elif 12 < Bounds.iterations[real, imag] <= 20: 
-                    color = (204,51,0)
-                elif 0 < Bounds.iterations[real, imag] <= 12: 
-                    color = (51, 0, 102)
-                elif Bounds.iterations[real, imag] == 0:
-                    color = (25, 0, 51)
+                color = (
+                    Bounds.iterations[real, imag] * 5 % 255, 
+                    Bounds.iterations[real, imag] * 10 % 255, 
+                    Bounds.iterations[real, imag] * 15 % 255
+                )
 
                 pygame.draw.circle(
                     win, 
                     color, 
                     (c.real * Bounds.SCALE + 1400 / 2, c.imag * Bounds.SCALE + 800 / 2),
-                    5
+                    1
                 )
