@@ -1,12 +1,11 @@
 import pygame
 from calc import Bounds
-import numpy as np
 
 
 pygame.init()
 
 WINDOW = pygame.display.set_mode((1000,800))
-pygame.display.set_caption("Mandelbrot Set")
+pygame.display.set_caption("Mandelbrot Set Generator")
 
 def main():
     running = True

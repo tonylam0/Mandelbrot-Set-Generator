@@ -42,13 +42,17 @@ class Bounds:
         for real in range(Bounds.c_values.shape[0]):
             for imag in range(Bounds.c_values.shape[1]):
                 c = Bounds.c_values[real, imag] 
-                if 75 < Bounds.iterations[real, imag] < 101: 
+                if Bounds.iterations[real, imag] > 75: 
                     color = (255, 165, 0)
-                elif 50 < Bounds.iterations[real, imag] < 76: 
+                elif 50 < Bounds.iterations[real, imag] <= 75: 
                     color = (255, 0, 0)
-                elif 25 < Bounds.iterations[real, imag] < 51: 
+                elif 20 < Bounds.iterations[real, imag] <= 50: 
                     color = (255, 255, 0)
-                elif 0 < Bounds.iterations[real, imag] < 26: 
+                # elif 15 < Bounds.iterations[real, imag] <= 25: 
+                #     color = (0, 122, 204)
+                elif 12 < Bounds.iterations[real, imag] <= 20: 
+                    color = (204,51,0)
+                elif 0 < Bounds.iterations[real, imag] <= 12: 
                     color = (51, 0, 102)
                 elif Bounds.iterations[real, imag] == 0:
                     color = (25, 0, 51)
@@ -57,5 +61,5 @@ class Bounds:
                     win, 
                     color, 
                     (c.real * Bounds.SCALE + 1400 / 2, c.imag * Bounds.SCALE + 800 / 2),
-                    1
+                    5
                 )
