@@ -16,7 +16,11 @@ def check_type(x):
             float(x)
             return float
         except ValueError:
-            return str
+            try:
+                eval(x)
+                return eval
+            except ValueError:
+                return str
 
 def power():
     while True:
@@ -25,6 +29,8 @@ def power():
         if check_type(power) == str:
             print("ERROR: PICK A NUMBER")
             continue
+        elif check_type(power) == eval:
+            Bounds.power = eval(power)
         elif float(power) < -77:
             print("ERROR: NUMBER MUST BE GREATER THAN -78")
             continue
