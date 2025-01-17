@@ -23,8 +23,9 @@ class Bounds:
     escape_radius = 2
 
     # Used to update values when power is set
+    # Cap point multiplier by 50
     def update():
-        Bounds.points = 1000 + Bounds.power * 50
+        Bounds.points = 1000 + Bounds.power * abs(50 - Bounds.power) % 50
         real_range = np.linspace(-2, 1, int(Bounds.points))
         imag_range = np.linspace(-1.5, 1.5, int(Bounds.points))
 
