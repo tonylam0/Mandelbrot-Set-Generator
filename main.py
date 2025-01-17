@@ -22,18 +22,19 @@ def power():
     while True:
         power = input("WHAT POWER OF THE MANDELBROT SET DO YOU WANT TO SEE: ")
 
-        if check_type(power) == int:
-            Bounds.power = int(power)
-            Bounds.update()
-            Bounds.calc()
-            break
-        elif check_type(power) == float:
-            Bounds.power = float(power)
-            Bounds.update()
-            Bounds.calc()
-            break
-        else:
+        if check_type(power) == str:
             print("ERROR: PICK A NUMBER")
+            continue
+        elif check_type(power) == int and int(power) > 0:
+            Bounds.power = int(power)
+        elif check_type(power) == float and float(power) > 0:
+            Bounds.power = float(power)
+        else:
+            Bounds.power = float(power)
+            Bounds.z = 0.0001  # z as 0 for negative exponent would return an error
+        Bounds.update()
+        Bounds.calc()
+        break
 
 def main():
     running = True
