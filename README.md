@@ -6,10 +6,12 @@ This Mandelbrot Set Generator allows you to choose the power of the Mandelbrot S
 This program uses Pygame to illustrate the set and NumPy to create the complex plane that the set resides on.
 
 ### Normal Mandelbrot Set
-![Normal Mandelbrot Set](https://github.com/user-attachments/assets/a816efe8-1d0d-454f-a230-4ee390013f8a")
+<img width="999" alt="Normal Mandelbrot" src="https://github.com/user-attachments/assets/69834657-9231-4b97-b682-21be81e0d0aa" />
+
 
 ### 4th Power Mandelbrot Set
-![4th Power Mandelbrot Set]("https://github.com/user-attachments/assets/8e2708e1-2356-4e19-931a-853d8a01c911")
+<img width="999" alt="Fourth Power" src="https://github.com/user-attachments/assets/3f99cdc9-46b1-4107-b53f-66db6bac2ced" />
+
 
 ### 2.6th Power Mandelbrot Set
-![2.6th Power Mandelbrot Set]("https://github.com/user-attachments/assets/259d30e9-0870-49c8-b19c-464e133adc7b")
+<img width="999" alt="2 6 Power" src="https://github.com/user-attachments/assets/cf452b8d-fdf9-40d0-b1a2-d3c847415397" />
