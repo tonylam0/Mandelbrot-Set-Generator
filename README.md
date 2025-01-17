@@ -1,6 +1,5 @@
 # Mandelbrot Set Generator
 
-
 ### About this project
 This Mandelbrot Set Generator allows you to choose the power of the Mandelbrot Set's recursive equation.
 
