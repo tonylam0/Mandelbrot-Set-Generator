@@ -25,6 +25,9 @@ def power():
         if check_type(power) == str:
             print("ERROR: PICK A NUMBER")
             continue
+        elif float(power) < -77:
+            print("ERROR: NUMBER MUST BE GREATER THAN -78")
+            continue
         elif check_type(power) == int and int(power) > 0:
             Bounds.power = int(power)
         elif check_type(power) == float and float(power) > 0:

@@ -5,7 +5,6 @@ import pygame
 class Bounds:
     SCALE = 350
     power = 2
-    z = 0  # Stays zero for postive exponents but become 0.0001 for negatives
 
     # Creates a range for real and imaginary numbers
     # Increasing the amount of points increases the accuracy
@@ -18,22 +17,19 @@ class Bounds:
 
     # Outputs a list of lists containing real array + imaginary array * j
     c_values = real + imag * 1j
-    iterations = np.zeros(c_values.shape)
     coordinates = {}
-
     escape_radius = 2
 
     # Used to update values when power is set
     # Cap point multiplier by 50
     def update():
-        Bounds.points = 1000 + Bounds.power * abs(50 - Bounds.power) % 50
+        Bounds.points = 1000 + abs(Bounds.power) * abs(50 - Bounds.power) % 50
         real_range = np.linspace(-2, 1, int(Bounds.points))
         imag_range = np.linspace(-1.5, 1.5, int(Bounds.points))
 
         real, imag = np.meshgrid(real_range, imag_range)
 
         Bounds.c_values = real + imag * 1j
-        Bounds.iterations = np.zeros(Bounds.c_values.shape)
         Bounds.coordinates = {}
     
     # Mandelbrot's recursive formula
@@ -43,18 +39,17 @@ class Bounds:
         for real in range(Bounds.c_values.shape[0]):
             print(f"Computing: {int(real/Bounds.points*100+1)}% done")
             for imag in range(Bounds.c_values.shape[1]):
-                z = Bounds.z
+                z = 0
                 c = Bounds.c_values[real, imag]  # Treated as coordinate in the 2D plane
                 max_iterations = 100
                 Bounds.coordinates[(real, imag)] = 0
 
                 for i in range(max_iterations):
-                    z = z**Bounds.power + c
+                    z = z**Bounds.power + c  # Formula can be changed to illustrate other fractals
                     
                     # Tracks when z unbounds
                     # i > 0 prevents escaped c's to be colored the same as bounded
                     if abs(z) > Bounds.escape_radius and i > 0:
-                        Bounds.iterations[real, imag] = i
                         Bounds.coordinates[real, imag] = i
                         break
     
