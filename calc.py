@@ -5,6 +5,7 @@ import pygame
 class Bounds:
     SCALE = 350
     power = 2
+    z = 0
 
     # Creates a range for real and imaginary numbers
     # Increasing the amount of points increases the accuracy
@@ -39,7 +40,7 @@ class Bounds:
         for real in range(Bounds.c_values.shape[0]):
             print(f"Computing: {int(real/Bounds.points*100+1)}% done")
             for imag in range(Bounds.c_values.shape[1]):
-                z = 0
+                z = Bounds.z
                 c = Bounds.c_values[real, imag]  # Treated as coordinate in the 2D plane
                 max_iterations = 100
                 Bounds.coordinates[(real, imag)] = 0
@@ -50,7 +51,7 @@ class Bounds:
                     # Tracks when z unbounds
                     # i > 0 prevents escaped c's to be colored the same as bounded
                     if abs(z) > Bounds.escape_radius and i > 0:
-                        Bounds.coordinates[real, imag] = i
+                        Bounds.coordinates[real, imag] = i  # - np.log2(np.log2(abs(z) + 1e-10))
                         break
     
     

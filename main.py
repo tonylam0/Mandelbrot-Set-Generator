@@ -32,7 +32,7 @@ def power():
         elif check_type(power) == eval:
             Bounds.power = eval(power)
         elif float(power) < -77:
-            print("ERROR: NUMBER MUST BE GREATER THAN -78")
+            print("ERROR: NUMBER MUST BE GREATER THAN OR EQUAL TO -77")
             continue
         elif check_type(power) == int and int(power) > 0:
             Bounds.power = int(power)
