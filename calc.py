@@ -8,7 +8,7 @@ class Bounds:
 
     # Creates a range for real and imaginary numbers
     # Increasing the amount of points increases the accuracy
-    points = 1000 * power / 2
+    points = 1000
     real_range = np.linspace(-2, 1, int(points))
     imag_range = np.linspace(-1.5, 1.5, int(points))
 
@@ -24,7 +24,7 @@ class Bounds:
 
     # Used to update values when power is set
     def update():
-        Bounds.points = 1000 + Bounds.power * 50
+        Bounds.points = 1000 * Bounds.power
         real_range = np.linspace(-2, 1, int(Bounds.points))
         imag_range = np.linspace(-1.5, 1.5, int(Bounds.points))
 
@@ -34,7 +34,7 @@ class Bounds:
         Bounds.iterations = np.zeros(Bounds.c_values.shape)
         Bounds.coordinates = {}
     
-    # Iterative formula
+    # Mandelbrot's recursive formula
     # c represents a complex number 
     def calc():
         # Will return numbers of points in ranges
