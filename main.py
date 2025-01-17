@@ -32,6 +32,7 @@ def power():
         else:
             Bounds.power = float(power)
             Bounds.z = 0.0001  # z as 0 for negative exponent would return an error
+            Bounds.escape_radius = 5
         Bounds.update()
         Bounds.calc()
         break
