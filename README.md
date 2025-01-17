@@ -5,6 +5,8 @@ This Mandelbrot Set Generator allows you to choose the power of the Mandelbrot S
 
 ## Mandelbrot Examples
 ### Normal Mandelbrot Set
+<img width="650" alt="Normal Mandelbrot" src="https://github.com/user-attachments/assets/69834657-9231-4b97-b682-21be81e0d0aa" />
+
 
 
 ### 4th Power Mandelbrot Set
