@@ -9,19 +9,15 @@ pygame.display.set_caption("Mandelbrot Set Generator")
 
 def check_type(x):
     try:
-        int(x)
-        return int
+        float(x)
+        return float
     except ValueError:
         try:
-            float(x)
-            return float
-        except ValueError:
-            try:
-                eval(x)
-                return eval
-            except ValueError:
-                return str
-
+            eval(x)
+            return eval
+        except (ValueError, SyntaxError):
+            return str 
+        
 def power():
     while True:
         power = input("WHAT POWER OF THE MANDELBROT SET DO YOU WANT TO SEE: ")
@@ -34,14 +30,16 @@ def power():
         elif float(power) < -77:
             print("ERROR: NUMBER MUST BE GREATER THAN OR EQUAL TO -77")
             continue
-        elif check_type(power) == int and int(power) > 0:
-            Bounds.power = int(power)
         elif check_type(power) == float and float(power) > 0:
             Bounds.power = float(power)
         else:
             Bounds.power = float(power)
             Bounds.z = 0.0001  # z as 0 for negative exponent would return an error
             Bounds.escape_radius = 5
+            Bounds.real_range = [-3, 3]
+            Bounds.imag_range = [-2, 3]
+            Bounds.SCALE /= 1.5
+            
         Bounds.update()
         Bounds.calc()
         break

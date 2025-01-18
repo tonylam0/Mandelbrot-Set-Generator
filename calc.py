@@ -10,11 +10,14 @@ class Bounds:
     # Creates a range for real and imaginary numbers
     # Increasing the amount of points increases the accuracy
     points = 1000
-    real_range = np.linspace(-2, 1, int(points))
-    imag_range = np.linspace(-1.5, 1.5, int(points))
+    real_array = np.linspace(-2, 1, int(points))
+    imag_array = np.linspace(-1.5, 1.5, int(points))
+
+    real_range = [-2, 1]
+    imag_range = [-1.5, 1.5]
 
     # Creates a 2D grid for the complex plane
-    real, imag = np.meshgrid(real_range, imag_range)
+    real, imag = np.meshgrid(real_array, imag_array)
 
     # Outputs a list of lists containing real array + imaginary array * j
     c_values = real + imag * 1j
@@ -25,10 +28,13 @@ class Bounds:
     # Cap point multiplier by 50
     def update():
         Bounds.points = 1000 + abs(Bounds.power) * abs(50 - Bounds.power) % 50
-        real_range = np.linspace(-2, 1, int(Bounds.points))
-        imag_range = np.linspace(-1.5, 1.5, int(Bounds.points))
+        real_array = np.linspace(Bounds.real_range[0], Bounds.real_range[1], int(Bounds.points))
+        imag_array = np.linspace(Bounds.imag_range[0], Bounds.imag_range[1], int(Bounds.points))
 
-        real, imag = np.meshgrid(real_range, imag_range)
+        # real_range = np.linspace(-3, 3, int(Bounds.points))
+        # imag_range = np.linspace(-2, 3, int(Bounds.points))
+
+        real, imag = np.meshgrid(real_array, imag_array)
 
         Bounds.c_values = real + imag * 1j
         Bounds.coordinates = {}
@@ -58,10 +64,10 @@ class Bounds:
     def draw(win):
         for coordinate, i in Bounds.coordinates.items():
             c = Bounds.c_values[coordinate[0], coordinate[1]] 
-            color = (
-                i * 5 % 255, 
+            color = (  # Change colors by changing multiplier value
                 i * 10 % 255, 
-                i * 15 % 255
+                i * 4 % 255, 
+                i * 8 % 255
             )
 
             pygame.draw.circle(
