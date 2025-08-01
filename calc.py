@@ -3,7 +3,7 @@ import pygame
 
 
 class Bounds:
-    SCALE = 350
+    SCALE = 350  # Contols how large the set appears on the screen
     power = 2
     z = 0
 
@@ -70,6 +70,7 @@ class Bounds:
                 i * 8 % 255
             )
 
+            # The numbers 1400 and 800 centers the fractal within the window
             pygame.draw.circle(
                 win, 
                 color, 

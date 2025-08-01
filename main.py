@@ -34,9 +34,15 @@ def power():
             Bounds.power = float(power)
         else:
             Bounds.power = float(power)
-            Bounds.z = 0.0001  # z as 0 for negative exponent would return an error
-            Bounds.escape_radius = 5
-            Bounds.real_range = [-3, 3]
+
+            # z as 0 to a negative exponent would return an error
+            Bounds.z = 0.0001
+
+            # Adjusts to negative powers because they grow more slowly than positive powers
+            Bounds.escape_radius = 5 
+
+            # Extends the viewing window b/c negative sets are wider
+            Bounds.real_range = [-3, 3]  
             Bounds.imag_range = [-2, 3]
             Bounds.SCALE /= 1.5
             
