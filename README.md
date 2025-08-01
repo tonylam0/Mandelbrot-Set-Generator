@@ -11,7 +11,7 @@ This interactive Mandelbrot Set Generator visualizes different forms of the Mand
 
 
 ## Mandelbrot Examples
-### Normal Mandelbrot Set
+### Normal Mandelbrot Set (2nd Power)
 <img width="400" alt="Normal Mandelbrot" src="https://github.com/user-attachments/assets/69834657-9231-4b97-b682-21be81e0d0aa" />
 
 
